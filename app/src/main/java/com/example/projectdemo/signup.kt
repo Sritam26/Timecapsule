@@ -7,12 +7,17 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.auth.FirebaseAuth
 
 class signup : AppCompatActivity() {
+    //Declare firebase auth instance
+    private lateinit var auth:FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
+        //Initializing firebaseauth instance
+        auth=FirebaseAuth.getInstance()
 
         // Find the views by their IDs
         val usernameEditText = findViewById<TextInputEditText>(R.id.username)
@@ -42,8 +47,19 @@ class signup : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(this){
+                task->
+                if (task.isSuccessful){
+                    Toast.makeText(this, "Registration Successful", Toast.LENGTH_SHORT).show()
+
+                }
+                else{
+                    Toast.makeText(this, "Registration not Successful", Toast.LENGTH_SHORT).show()
+
+                }
+            }
+
             // Here you can add code to handle the registration process
-            Toast.makeText(this, "Registration Successful", Toast.LENGTH_SHORT).show()
         }
         var loginbtn:Button=findViewById(R.id.button4)
         loginbtn.setOnClickListener{

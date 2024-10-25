@@ -10,11 +10,16 @@
     android:background="@drawable/bcg1">
 
     <!-- Username Input -->
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="match_parent"
-        android:layout_height="152dp"
-        app:srcCompat="@drawable/myimg" />
+   <com.airbnb.lottie.LottieAnimationView
+       android:id="@+id/lottieAnimationViewsignup"
+       android:layout_width="200dp"
+       android:layout_height="150dp"
+       app:lottie_loop="true"
+       app:lottie_autoPlay="true"
+       app:lottie_rawRes="@raw/signupsplashscreen"
+       android:layout_marginLeft="70dp"
+
+       />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -85,10 +90,10 @@
         android:id="@+id/register_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="#BB5ED3"
         android:text="Register"
-        android:textAllCaps="false"
 
-        android:backgroundTint="?attr/colorPrimary" />
+        android:textAllCaps="false" />
 
     <TextView
         android:id="@+id/textView2"
@@ -102,6 +107,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="login"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#BB5ED3"/>
 
 </LinearLayout>

@@ -5,19 +5,19 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#9BBFCD"
-    android:backgroundTint="#A19E99"
+
     android:orientation="vertical"
     android:padding="20dp"
 
     tools:context=".login">
 
 
-    <ImageView
-        android:id="@+id/imageView"
+    <com.airbnb.lottie.LottieAnimationView
         android:layout_width="wrap_content"
-        android:layout_height="118dp"
-        app:srcCompat="@drawable/logo" />
+        android:layout_height="159dp"
+        app:lottie_rawRes="@raw/loginsplash"
+        app:lottie_loop="true"
+        app:lottie_autoPlay="true"/>
 
 
     <com.google.android.material.textfield.TextInputLayout
@@ -94,5 +94,14 @@
             android:backgroundTint="#76BBDA"
             android:text="Reset" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="signup"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#76BBDA"
+        android:layout_marginLeft="10dp"/>
 
 </LinearLayout>
