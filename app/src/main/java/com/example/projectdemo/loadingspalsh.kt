@@ -16,8 +16,9 @@ class loadingspalsh : AppCompatActivity() {
         setContentView(R.layout.activity_loadingspalsh)
 
         Handler(Looper.getMainLooper()).postDelayed({
-            var intent= Intent(this,dashboard::class.java)
+            var intent=Intent(this,OptionsActivity::class.java)
             startActivity(intent)
+
             finish();
         },7000)
 

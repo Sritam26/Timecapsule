@@ -1,82 +1,46 @@
-package com.example.projectdemo// Replace with your actual package name
+package com.example.projectdemo
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
-import com.google.firebase.auth.FirebaseAuth
 
-class login : AppCompatActivity() {
-    private lateinit var auth:FirebaseAuth
+class LoginActivity : AppCompatActivity() {
 
-    private lateinit var emailinput: TextInputEditText
-    private lateinit var passwordInput: TextInputEditText
+    private lateinit var dbHelper: DatabaseHelper
+    private lateinit var emailEditText: EditText
+    private lateinit var passwordEditText: EditText
     private lateinit var loginButton: Button
-    private lateinit var resetButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        auth=FirebaseAuth.getInstance()
+        dbHelper = DatabaseHelper(this)
 
-        // Initialize views
-        emailinput = findViewById(R.id.aa)
-        passwordInput = findViewById(R.id.password)
+        emailEditText = findViewById(R.id.aa)
+        passwordEditText = findViewById(R.id.password)
         loginButton = findViewById(R.id.button2)
-        resetButton = findViewById(R.id.button3)
 
-        // Set up login button click listener
         loginButton.setOnClickListener {
-            performLogin()
+            val email = emailEditText.text.toString().trim()
+            val password = passwordEditText.text.toString().trim()
 
-
-        }
-
-        // Set up reset button click listener
-        resetButton.setOnClickListener {
-            resetFields()
+            if (email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "Please enter email and password", Toast.LENGTH_SHORT).show()
+            } else {
+                val validUser = dbHelper.checkUser(email, password)
+                if (validUser) {
+                    Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show()
+                    // Start a new activity or navigate to the main screen
+                    val intent=Intent(this,loadingspalsh::class.java)
+                    startActivity(intent)
+                } else {
+                    Toast.makeText(this, "Invalid credentials", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
-
-    private fun performLogin() {
-        val email = emailinput.text.toString().trim()
-        val password = passwordInput.text.toString().trim()
-
-        if (email.isEmpty()) {
-            Toast.makeText(this, "Username cannot be empty", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        if (password.isEmpty()) {
-            Toast.makeText(this, "Password cannot be empty", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-       auth.signInWithEmailAndPassword(email,password).addOnCompleteListener(this){
-           task->
-           if (task.isSuccessful){
-               Toast.makeText(this,"login successfull",Toast.LENGTH_SHORT).show()
-               var intent= Intent(this, loadingspalsh::class.java)
-               startActivity(intent)
-           }
-
-           else{
-               Toast.makeText(this,"login successfull",Toast.LENGTH_SHORT).show()
-
-           }
-
-       }
-    }
-
-    private fun resetFields() {
-        emailinput.text?.clear()
-        passwordInput.text?.clear()
-    }
-
-
-
 }

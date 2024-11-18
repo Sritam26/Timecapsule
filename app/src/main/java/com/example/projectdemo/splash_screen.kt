@@ -16,10 +16,10 @@ class splash_screen : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_splash_screen)
         Handler(Looper.getMainLooper()).postDelayed({
-            var intent=Intent(this,signup::class.java)
+            val intent = Intent(this,SignupActivity::class.java) // Replace with your target activity
             startActivity(intent)
-            finish();
-        },5000)
+            finish() // Close the splash screen so it's removed from the back stack
+        }, 3000)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
